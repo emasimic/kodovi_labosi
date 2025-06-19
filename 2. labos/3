@@ -1,0 +1,36 @@
+import numpy as np
+import matplotlib.pyplot as plt
+
+slika = plt.imread("tiger.png")
+
+osvijetljena = np.clip(slika * 1.5, 0, 1)
+rotirana = np.rot90(slika, k=-1)
+zrcaljena = np.fliplr(slika)
+umanjena = slika[::10, ::10]
+
+visina, sirina, _ = slika.shape
+drugi_dio = np.zeros_like(slika)
+drugi_dio[:, sirina//4:sirina//2] = slika[:, sirina//4:sirina//2]
+
+fig, prikazi = plt.subplots(1, 5, figsize=(15, 5))
+
+prikazi[0].imshow(osvijetljena)
+prikazi[0].set_title("Osvijetljena")
+
+prikazi[1].imshow(rotirana)
+prikazi[1].set_title("Rotirana")
+
+prikazi[2].imshow(zrcaljena)
+prikazi[2].set_title("Zrcaljena")
+
+prikazi[3].imshow(umanjena)
+prikazi[3].set_title("Umanjena")
+
+prikazi[4].imshow(drugi_dio)
+prikazi[4].set_title("Središnji dio")
+
+for prikaz in prikazi:
+    prikaz.axis("off")
+
+plt.tight_layout()
+plt.show()
